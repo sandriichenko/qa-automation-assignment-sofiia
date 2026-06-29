@@ -14,7 +14,7 @@ See [DESIGN.md](DESIGN.md) for the rationale behind every choice.
 ## Setup (under 5 minutes)
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/sandriichenko/qa-automation-assignment-sofiia.git
 cd qa-automation-assignment-sofiia
 
 python -m venv .venv
@@ -83,4 +83,5 @@ which takes precedence over `QA_BROWSER`.
 GitHub Actions workflow: [.github/workflows/tests.yml](.github/workflows/tests.yml).
 Runs on every push and pull request to `main`.
 
-Latest green run: `<paste link to the latest green Actions run here>`
+Latest runs (all green on `main`):
+https://github.com/sandriichenko/qa-automation-assignment-sofiia/actions/workflows/tests.yml?query=branch%3Amain
