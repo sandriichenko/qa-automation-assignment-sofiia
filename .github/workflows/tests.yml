@@ -1,0 +1,43 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: # allow manual re-runs to build up green CI history
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -e .
+
+      - name: Install browsers
+        run: playwright install --with-deps chromium
+
+      - name: Run UI + API tests in parallel
+        # -n 2 -> two pytest-xdist workers. UI and API tests run together;
+        # they are isolated (per-test BrowserContext / per-test API client).
+        run: pytest -n 2
+
+      - name: Upload report and failure artifacts
+        # always() so artifacts are uploaded even when tests fail -- that is
+        # exactly when the on-call engineer needs the trace and screenshots.
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: |
+            report.html
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 14
