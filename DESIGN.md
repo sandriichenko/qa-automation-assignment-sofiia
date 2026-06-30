@@ -70,11 +70,13 @@ persist. This shapes two deliberate decisions:
 ## Reporting and triage (a 3am failure)
 
 The on-call engineer opens the failed GitHub Actions run, downloads the
-`test-report` artifact, and opens `report.html` to see which test failed and
-why. For UI failures they open the captured `trace.zip` in the Playwright trace
-viewer (`playwright show-trace ...`): a full timeline with DOM snapshots,
-network, and console at the exact moment of failure — plus the screenshot and
-video. Root cause is reachable in minutes, without reproducing locally.
+`test-report` artifact, and opens `reports/report.html`. The report shows which
+test failed and, for UI failures, embeds the screenshot and links the Playwright
+`trace.zip` right in the failed-test row — so the evidence is inline, not buried
+in `test-results/`. Opening the trace in the viewer (`playwright show-trace ...`)
+gives a full timeline with DOM snapshots, network, and console at the exact
+moment of failure. Root cause is reachable in minutes, without reproducing
+locally.
 
 ## What I would do next (another two days)
 

@@ -59,7 +59,7 @@ def inventory_page(login_page: LoginPage) -> InventoryPage:
 # --- Reporting: link failure artifacts into the HTML report ----------------
 # pytest-playwright writes screenshot/trace/video into --output during fixture
 # teardown. We embed the screenshot and link the trace into the pytest-html row
-# so an on-call engineer sees the evidence in report.html, without hunting
+# so an on-call engineer sees the evidence in the HTML report, without hunting
 # through test-results/ by hand.
 
 
