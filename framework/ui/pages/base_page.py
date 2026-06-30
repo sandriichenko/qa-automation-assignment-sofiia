@@ -1,3 +1,5 @@
+from typing import Self
+
 from playwright.sync_api import Page
 
 
@@ -10,12 +12,12 @@ class BasePage:
     weaken) behaviour the framework gives us for free.
     """
 
-    URL_PATH = ""
+    URL_PATH: str = ""
 
-    def __init__(self, page: Page, base_url: str):
+    def __init__(self, page: Page, base_url: str) -> None:
         self.page = page
         self.base_url = base_url
 
-    def open(self):
+    def open(self) -> Self:
         self.page.goto(f"{self.base_url}{self.URL_PATH}")
         return self

@@ -11,7 +11,7 @@ import pytest
 
 
 @pytest.hookimpl(tryfirst=True)
-def pytest_configure(config):
+def pytest_configure(config: pytest.Config) -> None:
     """Write the HTML report under reports/.
 
     Locally the filename carries the run date/time (reports/report_<timestamp>.html)

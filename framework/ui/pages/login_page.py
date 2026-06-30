@@ -7,7 +7,7 @@ from .inventory_page import InventoryPage
 class LoginPage(BasePage):
     URL_PATH = "/"
 
-    def __init__(self, page: Page, base_url: str):
+    def __init__(self, page: Page, base_url: str) -> None:
         super().__init__(page, base_url)
         # Intent-based selectors. Swag Labs exposes data-test attributes, which
         # are mapped to get_by_test_id via the configure_playwright fixture.
@@ -22,7 +22,7 @@ class LoginPage(BasePage):
         self.login_button.click()
         return InventoryPage(self.page, self.base_url)
 
-    def expect_error(self, text: str):
+    def expect_error(self, text: str) -> None:
         # Web-first assertions: poll until the error is visible and contains the
         # exact wording the app shows. If the copy changes, this fails loudly.
         expect(self.error).to_be_visible()

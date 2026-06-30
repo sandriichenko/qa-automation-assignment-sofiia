@@ -9,7 +9,7 @@ class JsonPlaceholderClient:
     construct URLs themselves.
     """
 
-    def __init__(self, base_url: str, timeout: float = 10.0):
+    def __init__(self, base_url: str, timeout: float = 10.0) -> None:
         # Retries here are transport-level (DNS/connect/read glitches), NOT
         # status-code retries -- we never mask a real 404/500 from the API.
         transport = httpx.HTTPTransport(retries=2)
@@ -35,5 +35,5 @@ class JsonPlaceholderClient:
     def delete_post(self, post_id: int) -> httpx.Response:
         return self._client.delete(f"/posts/{post_id}")
 
-    def close(self):
+    def close(self) -> None:
         self._client.close()

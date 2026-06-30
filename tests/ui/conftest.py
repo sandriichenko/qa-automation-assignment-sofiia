@@ -1,16 +1,17 @@
 import base64
 import re
+from collections.abc import Generator
 from pathlib import Path
 
 import pytest
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page, Playwright, expect
 
 from config.settings import settings
 from framework.ui.pages.login_page import LoginPage
 from framework.ui.pages.inventory_page import InventoryPage
 
 
-def pytest_configure(config):
+def pytest_configure(config: pytest.Config) -> None:
     """Make settings.browser the single env-overridable default (QA_BROWSER).
 
     pytest-playwright selects the engine from --browser. If it was not passed on
@@ -22,7 +23,7 @@ def pytest_configure(config):
 
 
 @pytest.fixture(scope="session", autouse=True)
-def configure_playwright(playwright):
+def configure_playwright(playwright: Playwright) -> None:
     """Session-wide Playwright setup.
 
     - Map get_by_test_id(...) to Swag Labs' data-test attribute (it defaults to
@@ -35,7 +36,7 @@ def configure_playwright(playwright):
 
 
 @pytest.fixture(autouse=True)
-def apply_default_timeout(page: Page):
+def apply_default_timeout(page: Page) -> None:
     # Apply the configured timeout to all actions/navigations on this page.
     page.set_default_timeout(settings.timeout_ms)
 
@@ -63,7 +64,7 @@ def inventory_page(login_page: LoginPage) -> InventoryPage:
 # through test-results/ by hand.
 
 
-def _artifact_dir(item) -> Path | None:
+def _artifact_dir(item: pytest.Item) -> Path | None:
     output = Path(item.config.getoption("--output") or "test-results")
     if not output.exists():
         return None
@@ -75,7 +76,9 @@ def _artifact_dir(item) -> Path | None:
 
 
 @pytest.hookimpl(hookwrapper=True)
-def pytest_runtest_makereport(item, call):
+def pytest_runtest_makereport(
+    item: pytest.Item, call: pytest.CallInfo
+) -> Generator[None, object, None]:
     outcome = yield
     report = outcome.get_result()
 
