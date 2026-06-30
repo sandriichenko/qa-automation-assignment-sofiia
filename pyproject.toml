@@ -30,15 +30,14 @@ testpaths = ["tests"]
 #   - tracing:    Playwright trace (timeline + DOM snapshots + network) on failure
 #   - screenshot: PNG on failure
 #   - video:      browser video on failure
-#   - html:       self-contained pytest-html report
+#   - html:       self-contained pytest-html report (path set in tests/conftest.py:
+#                 reports/report_<timestamp>.html locally, reports/report.html in CI)
 addopts = """
     --strict-markers
     --tracing=retain-on-failure
     --screenshot=only-on-failure
     --video=retain-on-failure
     --output=test-results
-    --html=report.html
-    --self-contained-html
 """
 markers = [
     "ui: browser tests against Swag Labs",

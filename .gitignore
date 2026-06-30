@@ -15,4 +15,5 @@ venv/
 
 # Test artifacts and reports
 test-results/
+reports/
 report.html

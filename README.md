@@ -51,8 +51,8 @@ Every run produces a self-contained HTML report; failures also capture a
 screenshot, a video, and a Playwright trace.
 
 ```bash
-pytest                              # writes report.html + test-results/
-open report.html                    # the HTML report
+pytest                              # writes reports/report_<timestamp>.html + test-results/
+open reports/report_*.html          # the HTML report (timestamped per run)
 
 # Inspect a failure trace interactively:
 playwright show-trace test-results/<test-folder>/trace.zip
