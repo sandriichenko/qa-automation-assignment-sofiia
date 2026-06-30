@@ -17,8 +17,8 @@ See [DESIGN.md](DESIGN.md) for the rationale behind every choice.
 git clone https://github.com/sandriichenko/qa-automation-assignment-sofiia.git
 cd qa-automation-assignment-sofiia
 
-python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
+python3 -m venv .venv              # Windows: python -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
 
 pip install -e .
 playwright install chromium        # add --with-deps on Linux to pull OS libs
@@ -71,12 +71,13 @@ in tests.
 Common knobs:
 
 ```bash
-QA_BROWSER=firefox pytest tests/ui     # browser: chromium | firefox | webkit
+QA_BROWSER=chromium pytest tests/ui    # browser: chromium | firefox | webkit
 QA_TIMEOUT_MS=15000 pytest             # Playwright + API client timeout
 ```
 
-The browser can also be set per-run with pytest-playwright's `--browser` flag,
-which takes precedence over `QA_BROWSER`.
+chromium is installed by default. To run firefox or webkit, install them first:
+`playwright install firefox webkit`. The browser can also be set per-run with
+pytest-playwright's `--browser` flag, which takes precedence over `QA_BROWSER`.
 
 ## CI
 
