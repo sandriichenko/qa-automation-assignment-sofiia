@@ -21,7 +21,7 @@ python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
 
 pip install -e .
-playwright install --with-deps chromium
+playwright install chromium        # add --with-deps on Linux to pull OS libs
 ```
 
 ## Run locally

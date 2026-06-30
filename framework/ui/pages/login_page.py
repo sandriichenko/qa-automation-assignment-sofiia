@@ -10,7 +10,7 @@ class LoginPage(BasePage):
     def __init__(self, page: Page, base_url: str):
         super().__init__(page, base_url)
         # Intent-based selectors. Swag Labs exposes data-test attributes, which
-        # are mapped to get_by_test_id via the configure_test_id fixture.
+        # are mapped to get_by_test_id via the configure_playwright fixture.
         self.username = page.get_by_test_id("username")
         self.password = page.get_by_test_id("password")
         self.login_button = page.get_by_test_id("login-button")

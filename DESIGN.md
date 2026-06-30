@@ -46,7 +46,8 @@ localStorage, which the per-test context isolates.
 **What breaks first as parallelism goes up:** for a real backend it would be
 shared server-side data; here that doesn't exist, so the next limits are the
 external API's rate limiting and the CI runner's CPU/RAM under concurrent
-browsers. That's why the default is a modest `-n 2`.
+browsers. That's why we run a modest `-n 2` by default (documented in the
+README and used in CI).
 
 ## API testing against a simulated backend
 
@@ -63,8 +64,8 @@ persist. This shapes two deliberate decisions:
   stateful API. Against this sandbox there is nothing to tear down (the
   "created" id 101 is not really retrievable), so adding that lifecycle here
   would be ceremony with no payoff. Tests instead use the seeded id 1 and a
-  small payload factory (`tests/api/factories.py`). **On a real API the
-  create/teardown fixture is what I would build.**
+  small payload factory fixture (`post_payload` in `tests/api/conftest.py`).
+  **On a real API the create/teardown fixture is what I would build.**
 
 ## Reporting and triage (a 3am failure)
 
